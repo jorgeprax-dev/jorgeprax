@@ -43,9 +43,9 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://substack.com/@jorgeprax/feed') + '&count=3')
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://jorgeprax.substack.com/feed') + '&count=3')
       .then(r => r.json())
-      .then(d => { if (d.items && d.items.length > 0) setPosts(d.items); })
+      .then(d => { if (d.items && d.items.length > 0) setPosts(d.items.slice(0, 3)); })
       .catch(() => {});
   }, []);
 

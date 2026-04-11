@@ -98,22 +98,31 @@ function App() {
       ))}
 
       <div style={s.label}>Escritura</div>
-      {articles.map((a, i) => (
-        <a key={a.title} href={a.link || a.url} target="_blank" rel="noopener noreferrer" style={{
-          display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px',
-          padding: '14px 0', textDecoration: 'none',
-          borderTop: i === 0 ? '0.5px solid #222' : 'none',
-          borderBottom: '0.5px solid #222',
-        }}>
-          <div>
-            <div style={{ fontSize: '14px', fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{a.title}</div>
-            <div style={{ fontSize: '12px', color: '#555', marginTop: '3px' }}>
-              Substack · {new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })}
-            </div>
+
+      {['Substack', 'Sintelo'].map(source => {
+        const sourcePosts = (posts.length > 0 ? posts : fallback).filter(a => a.source === source);
+        if (sourcePosts.length === 0) return null;
+        return (
+          <div key={source} style={{ marginBottom: '32px' }}>
+            <div style={{ fontSize: '12px', fontWeight: 500, color: '#555', marginBottom: '0', paddingBottom: '0' }}>{source}</div>
+            {sourcePosts.map((a, i) => (
+              <a key={a.title} href={a.link || a.url} target="_blank" rel="noopener noreferrer" style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px',
+                padding: '12px 0', textDecoration: 'none',
+                borderBottom: '0.5px solid #222',
+              }}>
+                <div>
+                  <div style={{ fontSize: '14px', fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{a.title}</div>
+                  <div style={{ fontSize: '12px', color: '#555', marginTop: '3px' }}>
+                    {new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })}
+                  </div>
+                </div>
+                <span style={{ fontSize: '13px', color: '#555', flexShrink: 0, paddingTop: '2px' }}>↗</span>
+              </a>
+            ))}
           </div>
-          <span style={{ fontSize: '13px', color: '#555', flexShrink: 0, paddingTop: '2px' }}>↗</span>
-        </a>
-      ))}
+        );
+      })}
 
       <div style={s.label}>Contacto</div>
       <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>

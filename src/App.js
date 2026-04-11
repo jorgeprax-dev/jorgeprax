@@ -145,7 +145,8 @@ function App() {
       <div style={s.linkRow}>
         {[
           { label: 'jorge@sintelo.com', href: 'mailto:jorge@sintelo.com' },
-          { label: 'LinkedIn', href: 'https://linkedin.com/in/jorgeprax' },
+          { label: 'GitHub · jorgeprax-dev', href: 'https://github.com/jorgeprax-dev' },
+          { label: 'GitHub · jorgeprax81', href: 'https://github.com/jorgeprax81' },
           { label: 'Substack', href: 'https://substack.com/@jorgeprax' },
         ].map(l => (
           <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" style={s.link}>{l.label}</a>

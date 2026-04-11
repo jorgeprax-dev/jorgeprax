@@ -50,12 +50,23 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://substack.com/@jorgeprax/feed')
-      .then(r => r.json())
-      .then(data => {
-        if (data.items) setPosts(data.items.slice(0, 4));
-      })
-      .catch(() => {});
+    const substackFeed = 'https://substack.com/@jorgeprax/feed';
+    const sinteloFeed = 'https://www.sintelo.com/blog/rss.xml';
+    const proxy = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+    const fetchFeed = (url) =>
+      fetch(proxy + encodeURIComponent(url))
+        .then(r => r.json())
+        .then(d => d.items || [])
+        .catch(() => []);
+
+    Promise.all([fetchFeed(substackFeed), fetchFeed(sinteloFeed)]).then(([substack, sintelo]) => {
+      const combined = [
+        ...substack.slice(0, 3).map(p => ({ ...p, source: 'Substack' })),
+        ...sintelo.slice(0, 3).map(p => ({ ...p, source: 'Sintelo' })),
+      ];
+      if (combined.length > 0) setPosts(combined);
+    });
   }, []);
 
   return (
@@ -89,7 +100,7 @@ function App() {
       ))}
 
       <div style={s.label}>Escritura</div>
-      {(posts.length > 0 ? posts : articles).map((a, i) => (
+      {(posts.length > 0 ? posts : articles).map((a, i, arr) => (
         <a key={a.title} href={a.url || a.link} target="_blank" rel="noopener noreferrer" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px',
           padding: '14px 0', textDecoration: 'none',
@@ -99,7 +110,9 @@ function App() {
           <div>
             <div style={{ fontSize: '14px', fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{a.title}</div>
             <div style={{ fontSize: '12px', color: '#555', marginTop: '3px' }}>
-              {a.pubDate ? new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' }) : a.meta}
+              {a.source
+                ? `${a.source} · ${new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })}`
+                : a.meta}
             </div>
           </div>
           <span style={{ fontSize: '13px', color: '#555', flexShrink: 0, paddingTop: '2px' }}>↗</span>

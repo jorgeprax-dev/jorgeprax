@@ -43,10 +43,22 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://jorgeprax.substack.com/feed') + '&api_key=yci5czemsofiibxgualdvxcungznkln3ppuvbga4&count=3')
-      .then(r => r.json())
-      .then(d => { if (d.items && d.items.length > 0) setPosts(d.items.slice(0, 3)); })
-      .catch(() => {});
+    const API_KEY = 'yci5czemsofiibxgualdvxcungznkln3ppuvbga4';
+    const fetchFeed = (url, source) =>
+      fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=${API_KEY}&count=3`)
+        .then(r => r.json())
+        .then(d => (d.items || []).slice(0, 3).map(p => ({ ...p, source })))
+        .catch(() => []);
+
+    Promise.all([
+      fetchFeed('https://jorgeprax.substack.com/feed', 'Substack'),
+      fetchFeed('https://sintelo.com/rss.xml', 'Sintelo'),
+    ]).then(([substack, sintelo]) => {
+      const combined = [...substack, ...sintelo]
+        .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))
+        .slice(0, 6);
+      if (combined.length > 0) setPosts(combined);
+    });
   }, []);
 
   const fallback = [

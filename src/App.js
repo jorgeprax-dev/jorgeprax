@@ -70,6 +70,14 @@ function App() {
             <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 1.7, marginBottom: '1.25rem' }}>Capital allocation advisory para empresas industriales en México. ROIC, capital de trabajo, due diligence operacional.</div>
             <div style={{ fontSize: '14px', color: 'var(--accent)', marginBottom: '0.2rem' }}>Lucidez</div>
             <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 1.7 }}>Plataforma de autoconocimiento con IA en español. Seis instrumentos psicométricos validados.</div>
+            <div style={{ marginTop: '2.5rem' }}>
+              <div style={{ fontSize: '11px', letterSpacing: '0.15em', color: 'var(--dim)', textTransform: 'uppercase', marginBottom: '1rem' }}>Stack</div>
+              <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 2 }}>
+                Python · SQL<br/>
+                JavaScript · React<br/>
+                Astro · Jupyter
+              </div>
+            </div>
           </div>
         </div>
         <div>

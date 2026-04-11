@@ -1,4 +1,5 @@
 import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
   const s = {
@@ -46,6 +47,17 @@ function App() {
     { label: 'Substack', href: 'https://substack.com/@jorgeprax' },
   ];
 
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://substack.com/@jorgeprax/feed')
+      .then(r => r.json())
+      .then(data => {
+        if (data.items) setPosts(data.items.slice(0, 4));
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div style={s.page}>
       <div style={s.name}>Jorge Prax <span style={{ fontSize: '16px', fontWeight: 400, color: '#555' }}>(Jorge Castro)</span></div>
@@ -77,8 +89,8 @@ function App() {
       ))}
 
       <div style={s.label}>Escritura</div>
-      {articles.map((a, i) => (
-        <a key={a.title} href={a.url} target="_blank" rel="noopener noreferrer" style={{
+      {(posts.length > 0 ? posts : articles).map((a, i) => (
+        <a key={a.title} href={a.url || a.link} target="_blank" rel="noopener noreferrer" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px',
           padding: '14px 0', textDecoration: 'none',
           borderTop: i === 0 ? '0.5px solid #222' : 'none',
@@ -86,7 +98,9 @@ function App() {
         }}>
           <div>
             <div style={{ fontSize: '14px', fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{a.title}</div>
-            <div style={{ fontSize: '12px', color: '#555', marginTop: '3px' }}>{a.meta}</div>
+            <div style={{ fontSize: '12px', color: '#555', marginTop: '3px' }}>
+              {a.pubDate ? new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' }) : a.meta}
+            </div>
           </div>
           <span style={{ fontSize: '13px', color: '#555', flexShrink: 0, paddingTop: '2px' }}>↗</span>
         </a>

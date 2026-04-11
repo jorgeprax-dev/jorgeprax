@@ -57,7 +57,7 @@ function App() {
         <br /><br />
         <strong style={{ color: '#fff' }}>Lucidez</strong> — plataforma de autoconocimiento con IA en español. Seis instrumentos psicométricos validados. El mapa más preciso de cómo funciona tu mente.
         <br /><br />
-        <span style={{ color: '#555' }}>Ingeniería Industrial · ITESM · MSc Carnegie Mellon · Tampico, México</span>
+        <span style={{ color: '#555' }}>Ingeniería Industrial · ITESM · MSc Carnegie Mellon</span>
       </p>
 
       <div style={s.label}>Proyectos</div>

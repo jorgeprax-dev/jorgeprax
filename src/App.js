@@ -43,9 +43,18 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://jorgeprax.substack.com/feed') + '&count=3')
-      .then(r => r.json())
-      .then(d => { if (d.items && d.items.length > 0) setPosts(d.items.slice(0, 3)); })
+    fetch('https://corsproxy.io/?' + encodeURIComponent('https://jorgeprax.substack.com/feed'))
+      .then(r => r.text())
+      .then(str => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(str, 'text/xml');
+        const items = Array.from(xml.querySelectorAll('item')).slice(0, 3).map(item => ({
+          title: item.querySelector('title')?.textContent || '',
+          link: item.querySelector('link')?.textContent || '',
+          pubDate: item.querySelector('pubDate')?.textContent || '',
+        }));
+        if (items.length > 0) setPosts(items);
+      })
       .catch(() => {});
   }, []);
 

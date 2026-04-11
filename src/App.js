@@ -1,5 +1,5 @@
-import './App.css';
 import { useState, useEffect } from 'react';
+import './App.css';
 
 function App() {
   const s = {
@@ -34,13 +34,6 @@ function App() {
     },
   ];
 
-  const articles = [
-    { title: 'El vacío no es ausencia: es desestructuración', meta: 'Substack · Abril 2026', url: 'https://substack.com/@jorgeprax' },
-    { title: 'Por qué su empresa tiene buen EBITDA pero poco efectivo', meta: 'Sintelo · Marzo 2025', url: 'https://www.sintelo.com/blog/ebitda-efectivo' },
-    { title: 'Cómo calcular el ROIC de su empresa en una tarde', meta: 'Sintelo · Febrero 2025', url: 'https://www.sintelo.com/blog/calcular-roic' },
-    { title: 'El error más común al hacer due diligence operacional en México', meta: 'Sintelo · Febrero 2025', url: 'https://www.sintelo.com/blog/due-diligence-mexico' },
-  ];
-
   const links = [
     { label: 'jorge@sintelo.com', href: 'mailto:jorge@sintelo.com' },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/jorgeprax' },
@@ -50,24 +43,17 @@ function App() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const substackFeed = 'https://substack.com/@jorgeprax/feed';
-    const sinteloFeed = 'https://www.sintelo.com/blog/rss.xml';
-    const proxy = 'https://api.rss2json.com/v1/api.json?rss_url=';
-
-    const fetchFeed = (url) =>
-      fetch(proxy + encodeURIComponent(url))
-        .then(r => r.json())
-        .then(d => d.items || [])
-        .catch(() => []);
-
-    Promise.all([fetchFeed(substackFeed), fetchFeed(sinteloFeed)]).then(([substack, sintelo]) => {
-      const combined = [
-        ...substack.slice(0, 3).map(p => ({ ...p, source: 'Substack' })),
-        ...sintelo.slice(0, 3).map(p => ({ ...p, source: 'Sintelo' })),
-      ];
-      if (combined.length > 0) setPosts(combined);
-    });
+    fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent('https://substack.com/@jorgeprax/feed') + '&count=3')
+      .then(r => r.json())
+      .then(d => { if (d.items && d.items.length > 0) setPosts(d.items); })
+      .catch(() => {});
   }, []);
+
+  const fallback = [
+    { title: 'El vacío no es ausencia: es desestructuración', link: 'https://substack.com/@jorgeprax', pubDate: '2026-04-09', source: 'Substack' },
+  ];
+
+  const articles = posts.length > 0 ? posts : fallback;
 
   return (
     <div style={s.page}>
@@ -100,8 +86,8 @@ function App() {
       ))}
 
       <div style={s.label}>Escritura</div>
-      {(posts.length > 0 ? posts : articles).map((a, i, arr) => (
-        <a key={a.title} href={a.url || a.link} target="_blank" rel="noopener noreferrer" style={{
+      {articles.map((a, i) => (
+        <a key={a.title} href={a.link || a.url} target="_blank" rel="noopener noreferrer" style={{
           display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px',
           padding: '14px 0', textDecoration: 'none',
           borderTop: i === 0 ? '0.5px solid #222' : 'none',
@@ -110,9 +96,7 @@ function App() {
           <div>
             <div style={{ fontSize: '14px', fontWeight: 500, color: '#fff', lineHeight: 1.4 }}>{a.title}</div>
             <div style={{ fontSize: '12px', color: '#555', marginTop: '3px' }}>
-              {a.source
-                ? `${a.source} · ${new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })}`
-                : a.meta}
+              Substack · {new Date(a.pubDate).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' })}
             </div>
           </div>
           <span style={{ fontSize: '13px', color: '#555', flexShrink: 0, paddingTop: '2px' }}>↗</span>

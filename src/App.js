@@ -50,7 +50,15 @@ function App() {
     <div style={s.page}>
       <div style={s.name}>Jorge Prax <span style={{ fontSize: '16px', fontWeight: 400, color: '#555' }}>(Jorge Castro)</span></div>
       <div style={s.role}>Fundador · Tampico, México</div>
-      <p style={s.bio}>Ingeniero industrial. MSc Carnegie Mellon. Trabajo en la intersección de capital, operaciones y mente — buscando lo que permanece oculto a simple vista. Antes en London Consulting Group, Microsoft y Accenture.</p>
+      <p style={s.bio}>
+        Construyo herramientas que hacen visible lo que normalmente permanece oculto.
+        <br /><br />
+        <strong style={{ color: '#fff' }}>Sintelo</strong> — consultoría de capital para empresas industriales en México. Diagnosticamos el ROIC real, descomponemos el capital de trabajo y priorizamos las palancas de mayor impacto. Antes: London Consulting Group (Director de Business Intelligence, +$25M USD en mejoras documentadas), Microsoft Azure, Accenture.
+        <br /><br />
+        <strong style={{ color: '#fff' }}>Lucidez</strong> — plataforma de autoconocimiento con IA en español. Seis instrumentos psicométricos validados. El mapa más preciso de cómo funciona tu mente.
+        <br /><br />
+        <span style={{ color: '#555' }}>Ingeniería Industrial · ITESM · MSc Carnegie Mellon · Tampico, México</span>
+      </p>
 
       <div style={s.label}>Proyectos</div>
       {projects.map(p => (

@@ -58,9 +58,47 @@ function App() {
       <div style={s.name}>Jorge Prax</div>
 
       <p style={s.bio}>Construyo herramientas que hacen visible lo que normalmente permanece oculto.</p>
-      <p style={s.bio}><span style={s.bioStrong}>Sintelo</span> — consultoría de capital para empresas industriales en México. Diagnosticamos el ROIC real, descomponemos el capital de trabajo y priorizamos las palancas de mayor impacto. Antes: London Consulting Group (Director de Business Intelligence, +$25M USD en mejoras documentadas), Microsoft Azure, Accenture.</p>
-      <p style={s.bio}><span style={s.bioStrong}>Lucidez</span> — plataforma de autoconocimiento con IA en español. Seis instrumentos psicométricos validados. El mapa más preciso de cómo funciona tu mente.</p>
-      <div style={s.bioMeta}>Ingeniería Industrial · ITESM · MSc Carnegie Mellon</div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', marginTop: '3rem' }}>
+        <div>
+          <div style={s.sourceLabel}>Proyectos</div>
+          <div style={{ marginTop: '1.5rem' }}>
+            <div style={{ fontSize: '14px', color: 'var(--accent)', marginBottom: '0.2rem' }}>Sintelo</div>
+            <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 1.7, marginBottom: '1.25rem' }}>Capital allocation advisory para empresas industriales en México. ROIC, capital de trabajo, due diligence operacional.</div>
+            <div style={{ fontSize: '14px', color: 'var(--accent)', marginBottom: '0.2rem' }}>Lucidez</div>
+            <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 1.7 }}>Plataforma de autoconocimiento con IA en español. Seis instrumentos psicométricos validados.</div>
+          </div>
+        </div>
+        <div>
+          <div style={s.sourceLabel}>Formación</div>
+          <div style={{ marginTop: '1.5rem' }}>
+            {[
+              { company: 'ITESM', role: 'Ingeniería Industrial' },
+              { company: 'Carnegie Mellon University', role: 'MSc in Information Systems Management' },
+              { company: 'ITESM', role: 'MSc in Management of IT' },
+            ].map((e, i) => (
+              <div key={i} style={{ paddingBottom: '0.85rem', marginBottom: '0.85rem', borderBottom: '0.5px solid var(--border)' }}>
+                <div style={{ fontSize: '13px', color: 'var(--accent)', marginBottom: '0.2rem' }}>{e.company}</div>
+                <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 1.6 }}>{e.role}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ ...s.sourceLabel, marginTop: '2rem' }}>Experiencia</div>
+          <div style={{ marginTop: '1.5rem' }}>
+            {[
+              { company: 'London Consulting Group · 6 años', role: 'Director de Business Intelligence · Transformación operativa en LATAM, EE.UU. y Canadá · +$25M USD en mejoras documentadas' },
+              { company: 'Microsoft Azure', role: 'Supply Chain y analítica aplicada a operaciones industriales' },
+              { company: 'Accenture', role: 'Integración de adquisiciones · Due diligence operativo' },
+              { company: 'Elanboard · Fundador', role: 'ERP / SAP B1 para empresas manufactureras en México' },
+            ].map((e, i, arr) => (
+              <div key={i} style={{ paddingBottom: '0.85rem', marginBottom: '0.85rem', borderBottom: i < arr.length - 1 ? '0.5px solid var(--border)' : 'none' }}>
+                <div style={{ fontSize: '13px', color: 'var(--accent)', marginBottom: '0.2rem' }}>{e.company}</div>
+                <div style={{ fontSize: '13px', color: 'var(--dim)', lineHeight: 1.6 }}>{e.role}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <div style={s.divider} />
       <span style={s.label}>Proyectos</span>

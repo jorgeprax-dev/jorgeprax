@@ -65,8 +65,6 @@ function App() {
     { title: 'El vacío no es ausencia: es desestructuración', link: 'https://substack.com/@jorgeprax', pubDate: '2026-04-09', source: 'Substack' },
   ];
 
-  const articles = posts.length > 0 ? posts : fallback;
-
   return (
     <div style={s.page}>
       <div style={s.name}>Jorge Prax <span style={{ fontSize: '16px', fontWeight: 400, color: '#555' }}>(Jorge Castro)</span></div>

@@ -54,6 +54,9 @@ function App() {
 
   return (
     <div style={s.page}>
+      <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'var(--accent-dim)', border: '0.5px solid var(--accent-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: '24px', color: 'var(--accent)', marginBottom: '2rem' }}>
+        JP
+      </div>
       <div style={s.eyebrow}>Tampico, México</div>
       <div style={s.name}>Jorge Prax</div>
 

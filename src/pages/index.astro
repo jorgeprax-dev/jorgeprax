@@ -104,6 +104,20 @@ const contactos = [
     ))}
 
     <div class="divider"></div>
+    <span class="label">Podcast</span>
+
+    <div class="podcast-placeholder">
+      <div class="podcast-title">Corredor Adentro</div>
+      <div class="podcast-tagline">Conversaciones con quienes operan, construyen y transforman el corredor industrial TMA.</div>
+      <div class="podcast-status">Próximamente · 2026</div>
+      <div class="podcast-links">
+        <span class="podcast-link-soon">Spotify</span>
+        <span class="podcast-link-soon">Apple Podcasts</span>
+        <span class="podcast-link-soon">YouTube</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
     <span class="label">Escritura</span>
 
     <div id="writing-content">
@@ -377,6 +391,48 @@ const contactos = [
     font-size: 12px;
     color: #3A3430;
     margin-top: 5rem;
+  }
+
+  /* PODCAST */
+  .podcast-placeholder {
+    margin-top: 1.5rem;
+  }
+
+  .podcast-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: #F0EBE0;
+    margin-bottom: 0.5rem;
+  }
+
+  .podcast-tagline {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .podcast-status {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .podcast-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .podcast-link-soon {
+    font-size: 13px;
+    color: var(--dim);
+    border-bottom: 0.5px solid rgba(138, 132, 122, 0.2);
+    padding-bottom: 1px;
+    opacity: 0.5;
   }
 
   /* MOBILE */

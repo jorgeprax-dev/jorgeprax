@@ -2,33 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 
 const formacion = [
-  { company: 'ITESM', role: 'Ingeniería Industrial' },
+  { company: 'ITESM', role: 'Industrial Engineering' },
   { company: 'Carnegie Mellon University', role: 'MSc in Information Systems Management' },
-  { company: 'ITESM', role: 'MSc in Management of IT' },
 ];
 
 const experiencia = [
-  { company: 'London Consulting Group · 6 años', role: 'Director de Business Intelligence · Transformación operativa en LATAM, EE.UU. y Canadá · +$25M USD en mejoras documentadas' },
-  { company: 'Microsoft Azure', role: 'Supply Chain y analítica aplicada a operaciones industriales' },
-  { company: 'Accenture', role: 'Integración de adquisiciones · Due diligence operativo' },
-  { company: 'Elanboard · Fundador', role: 'ERP / SAP B1 para empresas manufactureras en México' },
+  { company: 'London Consulting Group · 6 years', role: 'Director of Business Intelligence · Operational transformation across the Americas · $25M+ USD in documented improvements' },
+  { company: 'Microsoft Azure', role: 'Supply chain and analytics applied to industrial operations' },
+  { company: 'Accenture', role: 'Acquisition integration · Operational due diligence' },
+  { company: 'Elanboard · Founder', role: 'ERP / SAP B1 for mid-market manufacturing companies' },
 ];
 
 const proyectosLargos = [
-  { name: 'Sintelo', url: 'https://sintelo.com', urlLabel: 'sintelo.com →', desc: 'Capital allocation advisory para empresas industriales. ROIC, capital de trabajo, due diligence operacional.' },
-  { name: 'TMA Ventures', url: 'https://tmaventures.vc', urlLabel: 'tmaventures.vc →', desc: 'Fondo de capital de riesgo en el corredor industrial Tampico–Madero–Altamira. $7.5M USD. Pre-seed a Serie A.' },
+  { name: 'Sintelo', url: 'https://sintelo.com', urlLabel: 'sintelo.com →', desc: 'Capital allocation advisory for mid-market industrial companies. ROIC, working capital, operational due diligence.' },
+  { name: 'TMA Ventures', url: 'https://tmaventures.vc', urlLabel: 'tmaventures.vc →', desc: 'Venture capital fund focused on the industrial mid-market in northeastern Mexico. $7.5M USD. Pre-seed to Series A.' },
 ];
 
 const fallback = {
-  Substack: [{ title: 'El vacío no es ausencia: es desestructuración', link: 'https://substack.com/@jorgeprax', pubDate: '2026-04-09' }],
   Sintelo: [
-    { title: 'Por qué su empresa tiene buen EBITDA pero poco efectivo', link: 'https://sintelo.com/blog/ebitda-efectivo', pubDate: '2025-03-12' },
-    { title: 'Cómo calcular el ROIC de su empresa en una tarde', link: 'https://sintelo.com/blog/calcular-roic', pubDate: '2025-02-28' },
-    { title: 'El error más común al hacer due diligence en México', link: 'https://sintelo.com/blog/due-diligence-mexico', pubDate: '2025-02-10' },
+    { title: 'Most turnarounds start with the wrong question', link: 'https://sintelo.com/blog/turnaround-roic', pubDate: '2026-05-27' },
+    { title: 'Your biggest customer is 40% of your revenue. What happens if they leave?', link: 'https://sintelo.com/blog/concentracion-de-cliente', pubDate: '2026-05-19' },
+    { title: 'Growing without improving ROIC is not scaling', link: 'https://sintelo.com/blog/escalabilidad-intrinseca', pubDate: '2026-05-12' },
   ],
 };
 
-const formatDate = (d) => new Date(d).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' });
+const formatDate = (d) => new Date(d).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
 const contactos = [
   { label: 'jorge@sintelo.com', href: 'mailto:jorge@sintelo.com' },
@@ -42,19 +40,19 @@ const contactos = [
   <div class="page">
 
     <div class="avatar">JP</div>
-    <div class="eyebrow">Tampico, México</div>
+    <div class="eyebrow">Austin, TX</div>
     <div class="name">Jorge Prax</div>
 
-    <p class="bio">Construyo herramientas que hacen visible lo que normalmente permanece oculto.</p>
+    <p class="bio">I build tools that make visible what normally stays hidden.</p>
 
     <div class="info-grid">
       <div>
-        <div class="source-label first">Proyectos</div>
+        <div class="source-label first">Projects</div>
         <div class="info-block-mt">
           <div class="proj-mini-name">Sintelo</div>
-          <div class="proj-mini-desc">Capital allocation advisory para empresas industriales en México. ROIC, capital de trabajo, due diligence operacional.</div>
+          <div class="proj-mini-desc">Capital allocation advisory for mid-market industrial companies. ROIC, working capital, operational due diligence.</div>
           <div class="proj-mini-name">TMA Ventures</div>
-          <div class="proj-mini-desc-last">Fondo de capital de riesgo en el corredor industrial Tampico–Madero–Altamira. $7.5M USD. Pre-seed a Serie A.</div>
+          <div class="proj-mini-desc-last">Venture capital fund focused on the industrial mid-market in northeastern Mexico. $7.5M USD. Pre-seed to Series A.</div>
 
           <div class="stack-wrap">
             <div class="stack-label">Stack</div>
@@ -68,7 +66,7 @@ const contactos = [
       </div>
 
       <div>
-        <div class="source-label first">Formación</div>
+        <div class="source-label first">Education</div>
         <div class="info-block-mt">
           {formacion.map((e) => (
             <div class="info-item">
@@ -78,7 +76,7 @@ const contactos = [
           ))}
         </div>
 
-        <div class="source-label">Experiencia</div>
+        <div class="source-label">Experience</div>
         <div class="info-block-mt">
           {experiencia.map((e, i) => (
             <div class={`info-item ${i === experiencia.length - 1 ? 'last' : ''}`}>
@@ -91,7 +89,7 @@ const contactos = [
     </div>
 
     <div class="divider"></div>
-    <span class="label">Proyectos</span>
+    <span class="label">Projects</span>
 
     {proyectosLargos.map((p) => (
       <a href={p.url} target="_blank" rel="noopener noreferrer" class="project-link">
@@ -108,8 +106,8 @@ const contactos = [
 
     <div class="podcast-placeholder">
       <div class="podcast-title">Nearshore</div>
-      <div class="podcast-tagline">Emprendimiento, tecnología e industria en la era del nearshoring.</div>
-      <div class="podcast-status">Próximamente · 2026</div>
+      <div class="podcast-tagline">Entrepreneurship, technology, and industry in the nearshoring era.</div>
+      <div class="podcast-status">Coming soon · 2026</div>
       <div class="podcast-links">
         <span class="podcast-link-soon">Spotify</span>
         <span class="podcast-link-soon">Apple Podcasts</span>
@@ -118,7 +116,7 @@ const contactos = [
     </div>
 
     <div class="divider"></div>
-    <span class="label">Escritura</span>
+    <span class="label">Writing</span>
 
     <div id="writing-content">
       {Object.entries(fallback).map(([source, posts]) => (
@@ -135,14 +133,14 @@ const contactos = [
     </div>
 
     <div class="divider"></div>
-    <span class="label">Contacto</span>
+    <span class="label">Contact</span>
     <div class="link-row">
       {contactos.map((l) => (
         <a href={l.href} target="_blank" rel="noopener noreferrer" class="link">{l.label}</a>
       ))}
     </div>
 
-    <div class="footer">Tampico, México · 2026</div>
+    <div class="footer">Austin, TX · 2026</div>
 
   </div>
 </Layout>
@@ -488,7 +486,7 @@ const contactos = [
   }
 
   function formatDate(dateStr) {
-    return new Date(dateStr).toLocaleDateString('es-MX', { month: 'long', year: 'numeric' });
+    return new Date(dateStr).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   }
 
   async function loadFeeds() {
